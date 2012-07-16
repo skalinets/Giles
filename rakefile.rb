@@ -2,13 +2,13 @@
 
 require 'rake'
 require 'albacore'
-require 'lib/FileSystem/filesystem'
+#require 'filesystem'
 
 task :default => [:full]
 
 @GilesVersion = "0.1.4.0"
 
-task :full => [:clean,:assemblyInfo,:build,:buildx86,:copyx86,:specifications,:createSpec,:createPackage]
+task :full => [:clean,:assemblyInfo,:build,:buildx86,:copyx86]
 
 task :clean do
 	FileUtils.rm_rf 'build'	
@@ -27,8 +27,8 @@ end
 
 desc "Copy x86 Giles to build directory"
 task :copyx86 do
-	FileSystem.CopyFiles("build/x86/Giles.exe", "build/Giles-x86.exe")
-	FileSystem.CopyFiles("build/x86/Giles.exe.config", "build/Giles-x86.exe.config")
+  FileUtils.cp("build/x86/Giles.exe", "build/Giles-x86.exe")
+	FileUtils.cp("build/x86/Giles.exe.config", "build/Giles-x86.exe.config")
 end
 
 mspec :specifications do |mspec|
